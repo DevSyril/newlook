@@ -16,6 +16,16 @@
   .h3 {
     @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold
   }
+  .h4 {
+    @apply text-[16px] xl:text-[14px] leading-[1.1] font-semibold
+  }
+  .p {
+    @apply text-[14px] xl:text-[16px] leading-[1.1]
+  }
+  
+  ::placeholder {
+    @apply text-gray-400 text-xs;
+  }
 
   .logo {
     @apply font-secondary;

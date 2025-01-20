@@ -12,7 +12,7 @@ export const Header = () => {
         <Logo />
         <Menu />
 
-        <form action="" method="post" className='flex items-center gap-2 py-1 px-4 border-2 border-gray-400 rounded-full'>
+        <form action="" method="post" className='flex items-center gap-2 py-1 px-4 border-[1px] border-primary rounded-full'>
           <input type="text" placeholder="Rechercher..." className='outline-transparent' />
           <button type="submit" className=''>
             <FaMagnifyingGlass />

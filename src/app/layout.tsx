@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Cairo_Play, Contrail_One, Nunito_Sans } from "next/font/google";
+import { Cairo_Play, Contrail_One, Nunito, Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/includes/Header";
+import { Footer } from "@/components/includes/Footer";
 
-const nunito = Nunito_Sans({
-  variable: "--font-nunito-sans",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
 });
 
@@ -30,9 +31,10 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${cairo.variable} antialiased`}
       >
-        <main className="app container">
+        <main className="app container flex flex-col gap-6">
           <Header />
           {children}
+          <Footer />
         </main>
       </body>
     </html>

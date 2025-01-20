@@ -19,7 +19,7 @@ module.exports = {
 		xl: '1200px',
 	},
 	fontFamily: {
-		primary: "var(--font-nunito-sans)",
+		primary: "var(--font-nunito)",
 		secondary: ["var(--font-cairo-one)", "sans-serif"],
 	},
   	extend: {
