@@ -35,7 +35,7 @@ const categories = [
 export const Footer = () => {
     return (
         <>
-            <div className='bg-green-200 w-full rounded-xl px-4 py-4 flex w-full justify-between'>
+            <div className='bg-green-200 w-full rounded-xl px-4 py-8 flex w-full justify-between'>
 
                 <div className="">
                     <Logo className="text-6xl" />

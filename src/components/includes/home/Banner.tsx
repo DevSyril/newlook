@@ -1,9 +1,13 @@
+"use client"
+
+import '../css/carousel.css';
 import Image from 'next/image'
-import React from 'react'
-import Logo from '../Logo'
+import React, { useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { BsArrowDownRight } from 'react-icons/bs'
-import { styleText } from 'util'
+import { initializeStack } from "./carouselUtils";
+
+
 
 const clientImages = [
     {
@@ -24,7 +28,25 @@ const clientImages = [
     }
 ]
 
-export const Banner = () => {
+const carrousel = [
+    { src: '/assets/images/banner.png', alt: 'Image de New Look' },
+    { src: '/assets/images/banner-2.jpg', alt: 'Image de New Look' },
+    { src: '/assets/images/banner-3.jpg', alt: 'Image de New Look' },
+    { src: '/assets/images/banner-4.jpg', alt: 'Image de New Look' },
+]
+
+
+export const Banner: React.FC = () => {
+
+    const stackRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const cleanup = initializeStack(stackRef.current);
+
+        return cleanup;
+    }, []);
+
+
     return (
         <div className='bg-yellow-400 px-4 py-6 rounded-xl grid' style={{
             gridTemplateColumns: "1fr 1fr"
@@ -65,9 +87,14 @@ export const Banner = () => {
             </div>
 
 
-            <div className="flex w-full h-full items-center justify-center">
-                <Image src={'/assets/images/banner.png'} width={400} height={100} alt='Bannière' className='' />
+            <div className="stack" ref={stackRef}>
+                {
+                    carrousel.map((item, index) => (
+                        <Image src={item.src} alt={item.alt} width={400} height={400} className='card' key={index} />
+                    ))
+                }
             </div>
+
         </div>
     )
 }

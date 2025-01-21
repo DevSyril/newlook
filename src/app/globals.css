@@ -2,27 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 
 @layer base {
   body {
     @apply font-primary text-black leading-loose;
   }
+
   .h1 {
     @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold
   }
+
   .h2 {
     @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold
   }
+
   .h3 {
     @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold
   }
+
   .h4 {
     @apply text-[16px] xl:text-[14px] leading-[1.1] font-semibold
   }
+
   .p {
     @apply text-[14px] xl:text-[16px] leading-[1.1]
   }
-  
+
   ::placeholder {
     @apply text-gray-400 text-xs;
   }
@@ -30,14 +41,48 @@
   .logo {
     @apply font-secondary;
   }
-  
+
+
+  .radial {
+    content: "";
+    bottom: 0;
+    inset: 0;
+    z-index: -1;
+    background: conic-gradient(from var(--gradient-angle),
+        rgb(109, 186, 22),
+        rgb(30, 119, 95),
+        rgb(55, 141, 167),
+        rgb(59, 91, 174),
+        rgb(144, 118, 236),
+        rgb(59, 91, 174),
+        rgb(55, 141, 167),
+        rgb(30, 119, 95),
+        rgb(109, 186, 22));
+    animation: rotation 8s linear infinite;
+  }
+
+  .radial::after {
+    filter: blur(30px);
+  }
+
+  @keyframes rotation {
+    0% {
+      --gradient-angle: 0deg;
+    }
+
+    100% {
+      --gradient-angle: 360deg;
+    }
+  }
+
   .text-outline {
     -webkit-text-stroke: 1px tomato;
   }
+
   .text-outline-second {
     -webkit-text-stroke: 1px #111111;
   }
-  
+
   .text-outline-hover {
     -webkit-text-stroke: 1px #00ff99;
   }
