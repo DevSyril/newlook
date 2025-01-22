@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ProductFilter } from './ProductFilter'
 import { BsArrowDownRight } from 'react-icons/bs'
 import { FaMinus, FaPlus } from "react-icons/fa6";
+import { Link } from 'lucide-react';
 
 
 export const ProductsDisplay = () => {
@@ -76,7 +77,7 @@ export const ProductsDisplay = () => {
                   {item.category}
                 </span>
               </div>
-              <a href='' className="rounded-full w-50 h-50 flex items-center group justify-center bg-primary absolute bottom-4 right-4 p-2 shadow-md cursor-pointer transform hover:scale-110 opacity-60">
+              <a href={`/products/${item.id}`} className="rounded-full w-50 h-50 flex items-center group justify-center bg-primary absolute bottom-4 right-4 p-2 shadow-md cursor-pointer transform hover:scale-110 opacity-60">
                 <BsArrowDownRight className='text-xl group-hover:-rotate-45 tranistion-all duration-500' />
               </a>
             </div>
