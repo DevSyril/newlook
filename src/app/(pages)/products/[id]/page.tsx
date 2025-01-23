@@ -34,10 +34,10 @@ export default function page({ params }: { params: { id: String } }) {
             <img src={products.image} alt="" className='aspect-square' />
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="font-bold text-2xl">{products.title} </h2>
+            <h2 className="font-bold text-2xl"> {products.title} </h2>
             <h2 className="">{products.description}</h2>
             <h3 className="">Prix: <span className="font-bold text-primary text-xl">{products.price} $</span></h3>
-            <h3 className="">Categorie: {products.category}</h3>
+            <h3 className="">Categorie: {products.category} </h3>
 
 
             <div className="flex gap-4">

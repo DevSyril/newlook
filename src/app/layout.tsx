@@ -3,6 +3,13 @@ import { Cairo_Play, Contrail_One, Nunito, Nunito_Sans } from "next/font/google"
 import "./globals.css";
 import { Header } from "@/components/includes/Header";
 import { Footer } from "@/components/includes/Footer";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -27,16 +34,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${nunito.variable} ${cairo.variable} antialiased`}
-      >
-        <main className="app container flex flex-col gap-6">
-          <Header />
-          {children}
-          <Footer />
-        </main>
-      </body>
-    </html>
+    <ClerkProvider>
+
+      <html lang="en">
+        <body
+          className={`${nunito.variable} ${cairo.variable} antialiased`}
+        >
+          <main className="app container flex flex-col gap-6">
+            <Header />
+            {children}
+            <Footer />
+          </main>
+        </body>
+      </html>
+
+    </ClerkProvider>
   );
 }
