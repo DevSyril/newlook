@@ -62,14 +62,14 @@ export const Banner: React.FC = () => {
 
 
                 <div className="flex gap-2">
-                    <Button className='group rounded-full text-white font-bold'>
+                    <a href='/products' className='group rounded-full text-white font-bold flex items-center gap-3 bg-primary py-3 px-4 text-sm'>
                         Nos collections
                         <BsArrowDownRight className='text-xl text-white group-hover:-rotate-45 transition-all duration-500' />
-                    </Button>
-                    <Button className='group rounded-full text-white font-bold opacity-50 hover:opacity-100'>
+                    </a>
+                    <a href='/about' className='group rounded-full text-white font-bold opacity-50 hover:opacity-100 flex items-center gap-3 bg-primary py-3 px-4 text-sm'>
                         A propos
                         <BsArrowDownRight className='text-xl text-white group-hover:-rotate-45 transition-all duration-500' />
-                    </Button>
+                    </a>
                 </div>
 
                 <div className="flex items-end gap-2 mt-2">
