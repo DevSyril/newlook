@@ -83,6 +83,10 @@
       .text-outline-second {
         -webkit-text-stroke: 1px #111111;
       }
+      
+      .text-outline-third {
+        -webkit-text-stroke: 1px #FFFFFF;
+      }
 
       .text-outline-hover {
         -webkit-text-stroke: 1px #00ff99;
