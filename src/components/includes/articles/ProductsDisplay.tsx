@@ -1,9 +1,10 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { ProductFilter } from './ProductFilter'
 import { BsArrowDownRight } from 'react-icons/bs'
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { Link } from 'lucide-react';
+import { useGlobalState } from '@/app/context/GlobalProvider';
 
 
 export const ProductsDisplay = () => {
@@ -11,10 +12,10 @@ export const ProductsDisplay = () => {
   const [products, setProducts] = useState([])
   const [currentProducts, setCurrentProducts] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
-  const [shopCart, setShopCart] = useState(0);
   const productsPerPage = 10;
   const isFirstRender = useRef(true);
 
+  const {cartItems, addToCart, removeFromCart} = useGlobalState();
 
   useEffect(() => {
 
@@ -60,12 +61,13 @@ export const ProductsDisplay = () => {
                   <img alt={item.title} src={item.image} className='rounded-xl w-full aspect-square' />
 
                   <div className="flex items-center bg-white rounded-full absolute bottom-2 right-1 px-1 py-1 border-primary border-2">
-                    <button className='rounded-full w-[20px] h-[20px] bg-primary text-black tranistion-all duration-500 hover:text-white flex items-center justify-center' onClick={() => setShopCart(() => shopCart - 1)} 
-                    disabled={shopCart == 0}>
+                    <button className='rounded-full w-[20px] h-[20px] bg-primary text-black tranistion-all duration-500 hover:text-white flex items-center justify-center' onClick={()=>removeFromCart(item.id)}
+                    disabled={cartItems[item.id] == 0}
+                    >
                       <FaMinus className='text-xs' />
                     </button>
-                    <input type="text" value={shopCart} readOnly className='border-none outline-none text-center max-w-[30px] text-xs' />
-                    <button className='rounded-full w-[20px] h-[20px] bg-primary text-black tranistion-all duration-500 hover:text-white flex items-center justify-center' onClick={() => setShopCart(() => shopCart + 1)}>
+                    <input type="text" placeholder={cartItems[item.id] ? cartItems[item.id] : "0" } readOnly className='border-none outline-none text-center max-w-[30px] text-xs' />
+                    <button className='rounded-full w-[20px] h-[20px] bg-primary text-black tranistion-all duration-500 hover:text-white flex items-center justify-center' onClick={()=>addToCart(item.id)}>
                       <FaPlus className='text-xs' />
                     </button>
                   </div>

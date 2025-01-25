@@ -8,6 +8,7 @@ import { FaBagShopping, FaMagnifyingGlass } from 'react-icons/fa6'
 import Link from 'next/link'
 import { auth } from '@clerk/nextjs/server'
 import { useClerk, UserButton, useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 
 export const Header = () => {
 
@@ -21,6 +22,7 @@ export const Header = () => {
     imageUrl: "",
   };
 
+  const router = useRouter();
 
   return (
     <div className="mt-2 ">
@@ -36,7 +38,7 @@ export const Header = () => {
         </form>
 
         <div className="flex items-center gap-4">
-          <button className='flex relative'>
+          <button className='flex relative' onClick={() => router.push('shopping') }>
             <FaBagShopping size={24} />
             <span className={`absolute index-10 bg-red-400 w-[14px] h-[14px] rounded-full text-[8px] flex justify-center items-center text-center top-0 right-0`}>0</span>
           </button>

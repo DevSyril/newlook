@@ -10,6 +10,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import ContextProvider from "./providers/ContextProvider";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -41,9 +42,11 @@ export default function RootLayout({
           className={`${nunito.variable} ${cairo.variable} antialiased`}
         >
           <main className="app container flex flex-col gap-6">
-            <Header />
-            {children}
-            <Footer />
+            <ContextProvider>
+              <Header />
+              {children}
+              <Footer />
+            </ContextProvider>
           </main>
         </body>
       </html>
