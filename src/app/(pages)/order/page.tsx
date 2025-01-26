@@ -3,6 +3,7 @@
 import React from 'react'
 import './style.css'
 import { useGlobalState } from '@/app/context/GlobalProvider';
+import { Button } from '@/components/ui/button';
 
 export default function page() {
   
@@ -47,7 +48,7 @@ export default function page() {
               <p>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2} $</p>
             </div>
             <hr />
-            <button >PROCEDER AU PAIMENT</button>
+            <Button className='text-white'>PROCEDER AU PAIEMENT</Button>
           </div>
         </div>
       </form>

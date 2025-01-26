@@ -1,12 +1,28 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import './style.css'
 import { useGlobalState } from '@/app/context/GlobalProvider';
+import { useRouter } from 'next/navigation';
 
 export default function page() {
 
     const { cartItems, products, removeFromCart, getTotalCartAmount } = useGlobalState();
+    const [productList, setProductList] = useState([]);
+    const router = useRouter()
+
+    const getProducts = () => {
+        const articles = []
+        Object.entries(cartItems).forEach(([key, value]) => {
+            let itemInfo = products.find((product) => product.id == key);
+            articles.push({ ...itemInfo, quantity: value });
+        });
+        setProductList(articles);
+    }
+
+    React.useEffect(() => {
+        getProducts();
+    }, [cartItems, removeFromCart]);
 
     return (
         <div className='cart'>
@@ -21,17 +37,17 @@ export default function page() {
                 </div>
                 <br />
                 <hr />
-                {products.map((item, index) => {
-                    if (cartItems[item._id] > 0) {
+                {productList.length > 0 && productList.map((item, index) => {
+                    if (cartItems[item.id] > 0) {
                         return (
                             <div key={index}>
                                 <div className='cart-items-title cart-items-items'>
                                     <img src={item.image} alt='' />
-                                    <p>{item.title  }</p>
+                                    <p>{item.title}</p>
                                     <p>{item.price} $</p>
-                                    <p>{cartItems[item._id]}</p>
-                                    <p>{item.price * cartItems[item._id]} $</p>
-                                    <p onClick={() => removeFromCart(item._id)} className='cross'>x</p>
+                                    <p>{item.quantity}</p>
+                                    <p>{item.price * item.quantity} $</p>
+                                    <p onClick={() => removeFromCart(item.id)} className='cross'>x</p>
                                 </div>
                                 <hr />
                             </div>
@@ -57,7 +73,7 @@ export default function page() {
                         <p>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2} $</p>
                     </div>
                     <hr />
-                    <button className='px-2' >PROCEDER AU PAIEMENT</button>
+                    <button className='px-4' onClick={() => router.replace('/order')} >PROCEDER AU PAIEMENT</button>
                 </div>
                 <div className='cart-promocode'>
                     <div>

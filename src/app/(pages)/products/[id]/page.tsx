@@ -21,12 +21,13 @@ export default function page({ params }: { params: { id: String } }) {
 
   }, [products])
 
+
   return (
     <div>
       <h1 className='text-6xl font-extrabold text-transparent text-outline'> {products.title} </h1>
 
       <div className="flex gap-6 mt-6 ">
-        <div className="max-w-[150px] flex flex-col gap-4">
+        <div className="max-w-[150px] flex  flex-col gap-4">
           <img src={products.image} alt="" className='border-2 border-primary aspect-square rounded-xl px-2 py-2' />
           <img src={products.image} alt="" className='border-2 border-primary aspect-square rounded-xl px-2 py-2' />
           <img src={products.image} alt="" className='border-2 border-primary aspect-square rounded-xl px-2 py-2' />

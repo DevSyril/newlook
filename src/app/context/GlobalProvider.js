@@ -18,7 +18,7 @@ export const GlobalProvider = ({ children }) => {
         getProducts();
     }, [])
 
-    const [cartItems, setCartItems] = useState({});
+    const [cartItems, setCartItems] = useState({})
 
     const addToCart = (itemId) => {
         if (!cartItems[itemId]) {
@@ -26,7 +26,6 @@ export const GlobalProvider = ({ children }) => {
         }
         else {
             setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
-            console.log(cartItems[itemId])
         }
     }
 
@@ -38,8 +37,8 @@ export const GlobalProvider = ({ children }) => {
         let totalAmount = 0;
         for (const item in cartItems) {
             if (cartItems[item] > 0) {
-                let itemInfo = products.find((product) => product._id === item);
-                // totalAmount += itemInfo.price * cartItems[item]
+                let itemInfo = products.find((product) => product.id == item);
+                totalAmount += itemInfo.price * cartItems[item]
             }
         }
         return totalAmount;
