@@ -5,12 +5,9 @@ import { Header } from "@/components/includes/Header";
 import { Footer } from "@/components/includes/Footer";
 import {
   ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
 } from '@clerk/nextjs'
 import ContextProvider from "./providers/ContextProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -46,6 +43,7 @@ export default function RootLayout({
               <Header />
               {children}
               <Footer />
+              <Toaster />
             </ContextProvider>
           </main>
         </body>

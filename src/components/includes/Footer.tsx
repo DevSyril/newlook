@@ -78,7 +78,7 @@ export const Footer = () => {
                     <h3 className='font-bold text-xl'>Rejoignez la newsletter</h3>
                     <SubscriptionForm />
 
-                    <ul className="flex gap-3">
+                    <ul className="flex gap-3 px-2">
                         {socials.map((social, index) => (
                             <li key={index} className='bg-white w-[30px] flex items-center justify-center h-[30px] rounded-full'>
                                 <a href={social.url}>{social.icon}</a>

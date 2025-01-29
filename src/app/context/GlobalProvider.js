@@ -7,6 +7,7 @@ export const GlobalUpdateContext = createContext();
 export const GlobalProvider = ({ children }) => {
 
     const [products, setProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     async function getProducts() {
         await fetch('https://fakestoreapi.com/products')
@@ -14,8 +15,21 @@ export const GlobalProvider = ({ children }) => {
             .then(json => setProducts(json))
     }
 
+    const filterByCategory = async (category) => {
+        await fetch(`https://fakestoreapi.com/products/category/${category}`)
+            .then(res => res.json())
+            .then(json => setProducts(json))
+    }
+
+    const sortProduct = async (direction) => {
+        await fetch(`https://fakestoreapi.com/products?sort=${direction}`)
+            .then(res => res.json())
+            .then(json => setProducts(json))
+    }
+
     React.useEffect(() => {
         getProducts();
+
     }, [])
 
     const [cartItems, setCartItems] = useState({})
@@ -44,14 +58,20 @@ export const GlobalProvider = ({ children }) => {
         return totalAmount;
     }
 
+
+
+
     const contextValue = {
         cartItems,
         setCartItems,
         addToCart,
         removeFromCart,
         getTotalCartAmount,
-        products
+        products,
+        filterByCategory,
+        sortProduct
     }
+
 
     return (
         <GlobalContext.Provider

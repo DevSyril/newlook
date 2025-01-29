@@ -3,31 +3,25 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { ProductFilter } from './ProductFilter'
 import { BsArrowDownRight } from 'react-icons/bs'
 import { FaMinus, FaPlus } from "react-icons/fa6";
-import { Link } from 'lucide-react';
 import { useGlobalState } from '@/app/context/GlobalProvider';
 
 
 export const ProductsDisplay = () => {
 
-  const [products, setProducts] = useState([])
+  const { cartItems, addToCart, removeFromCart, products } = useGlobalState();
   const [currentProducts, setCurrentProducts] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   const isFirstRender = useRef(true);
 
-  const {cartItems, addToCart, removeFromCart} = useGlobalState();
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+
 
   useEffect(() => {
-
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(json => setProducts(json))
-
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
     setCurrentProducts(() => products.slice(startIndex, endIndex));
+  }, [products, currentPage])
 
-  }, [products])
 
   useEffect(() => {
 
@@ -35,7 +29,7 @@ export const ProductsDisplay = () => {
       isFirstRender.current = false;
     else
       document.getElementById("target")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    
+
   }, [currentPage])
 
 
@@ -43,7 +37,7 @@ export const ProductsDisplay = () => {
 
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
-      gridTemplateColumns: "repeat(auto-fill, minmax(250px, 2fr))",
+      gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
     }
   };
 
@@ -56,18 +50,18 @@ export const ProductsDisplay = () => {
         {currentProducts.map((item, index) => (
           <div className='w-full' key={index}>
             <div className="relative">
-              <div className="bg-slate-100 px-2 py-2 rounded-xl ">
+              <div className="bg-slate-100 px-2 py-2 rounded-xl">
                 <div className="relative">
                   <img alt={item.title} src={item.image} className='rounded-xl w-full aspect-square' />
 
                   <div className="flex items-center bg-white rounded-full absolute bottom-2 right-1 px-1 py-1 border-primary border-2">
-                    <button className='rounded-full w-[20px] h-[20px] bg-primary text-black tranistion-all duration-500 hover:text-white flex items-center justify-center' onClick={()=>removeFromCart(item.id)}
-                    disabled={cartItems[item.id] == 0}
+                    <button className='rounded-full w-[20px] h-[20px] bg-primary text-black tranistion-all duration-500 hover:text-white flex items-center justify-center' onClick={() => removeFromCart(item.id)}
+                      disabled={cartItems[item.id] == 0}
                     >
                       <FaMinus className='text-xs' />
                     </button>
-                    <input type="text" placeholder={cartItems[item.id] ? cartItems[item.id] : "0" } readOnly className='border-none outline-none text-center max-w-[30px] text-xs' />
-                    <button className='rounded-full w-[20px] h-[20px] bg-primary text-black tranistion-all duration-500 hover:text-white flex items-center justify-center' onClick={()=>addToCart(item.id)}>
+                    <input type="text" placeholder={cartItems[item.id] ? cartItems[item.id] : "0"} readOnly className='border-none outline-none text-center max-w-[30px] text-xs' />
+                    <button className='rounded-full w-[20px] h-[20px] bg-primary text-black tranistion-all duration-500 hover:text-white flex items-center justify-center' onClick={() => addToCart(item.id)}>
                       <FaPlus className='text-xs' />
                     </button>
                   </div>
